@@ -63,7 +63,7 @@ all the layers are linearly connected with tanh() activation function after each
 ![alt text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/download%20(4).png)<br />
  <pre>                       eta                                                pt</pre><br />
 
-**Code:** Model architecture is saved in Model.py and have following functions:<br />
+**Code:**<br /> Model architecture is saved in AE_model.py and have following functions:<br />
 1.AE(*inputs)-->input: a 4x1 numpy array, output: a 3x1 encoded numpy array and a 4x1 reconstructed output<br />
 2.AE.describe()-->input:none, output:[input,200,200,100,50,3,50,100,200,200,Output]<br />
 **saved models:**<br />
@@ -75,7 +75,7 @@ saved models are in saves folder and can be loaded with python interpreter or ip
 (https://drive.google.com/open?id=1-mujHxt2HEdmo6C4wAWW5k88d3YEV9XN)<br />
 **testing data**<br />
 (https://drive.google.com/open?id=1mhweZvAIELxWq522Q8QhSGDzkXzy_Wxq)<br />
-## Training
+## Training<br />
 Training process can be observed in AE.ipynb I used a batch size of 1024 elements with learning rate varying from .1 to 1e-8
 model got its convergence in about 400 epochs with Ranger optimizer and no batch normalisation.
 
