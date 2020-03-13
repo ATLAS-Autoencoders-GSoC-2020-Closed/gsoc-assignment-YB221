@@ -1,6 +1,7 @@
 # AUTOENCODER_ATLAS
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)<br />
-Compressing 4 variable particle datasets using autoencoders, with the PyTorch and fastai python libraries.
+Compressing 4 variable particle datasets using autoencoders, with the PyTorch and fastai python libraries.<br />
+***For quick inference just clone the repository and run the AE.ipynb withut copying it to any other directory run all the cells one by one they are already commented it will plot all the histograms. It will also return prediction values and encodings.***  
 
 
 
