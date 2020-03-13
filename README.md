@@ -1,6 +1,5 @@
 # AUTOENCODER_ATLAS
-[![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](http://www.apache.org/licenses/LICENSE-2.0)
-
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 Compressing 4 variable particle datasets using autoencoders, with the PyTorch and fastai python libraries.
 
 
