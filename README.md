@@ -7,13 +7,13 @@ Compressing 4 variable particle datasets using autoencoders, with the PyTorch an
 
 ## Setup:
 #### Prerequisites:
-Fastai v=1.60[different versions of fastai may cause problem in loading the pretrained weights if saved with fastai]
-Python 3.6
-jupyter notebook
-PyTorch v1
-Pandas
-Numpy
-matplotlib(optional:if you want to plot results)
+Fastai v=1.60[different versions of fastai may cause problem in loading the pretrained weights if saved with fastai]<br />
+Python 3.6<br />
+jupyter notebook<br />
+PyTorch v1<br />
+Pandas<br />
+Numpy<br />
+matplotlib(optional:if you want to plot results)<br />
 
 #### To run the project:
 
