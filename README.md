@@ -3,19 +3,7 @@
 
 Compressing 4 variable particle datasets using autoencoders, with the PyTorch and fastai python libraries.
 
-[Setup and Prerequisites](#setup)
 
-[Quick guide](#quick-guide)
-
-[Data extraction](#data-extraction)
-
-[Training](#training)
-
-[Analysis](#analysis)
-
-[Saving back to ROOT](#saving-back-to-root)
-
-[TODO and ideas](#todo-and-ideas)
 
 ## Setup:
 #### Prerequisites:
@@ -63,79 +51,36 @@ Now run jupyter notebook and run the AE.ipynb in cloned folder
 )<br />
 all the layers are linearly connected with tanh() activation function after each layer except last layer as the actual value range wider than(-1,1).
 
-**Analysis and plots:** <br />
+**Analysis:** <br />
 ![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/M.jpeg)
 ![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/eta.jpeg)
 ![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/phi.jpeg)
 ![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/pt.jpeg)
+**RESIDUALS:**<br />
+![alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/download%20(1).png)
+![alt text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/download%20(2).png)<br />
+ <pre>                       M                                                  phi</pre><br />
+![alt text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/download%20(3).png)
+![alt text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/download%20(4).png)<br />
+ <pre>                       eta                                                pt</pre><br />
 
-**Code structure:** The folders named `4D/`, `25D/` and `27D/` simply holds training analysis scripts for that amount of dimensions. 
+**Code:** Model architecture is saved in Model.py and have following functions:<br />
+1.AE(*inputs)-->input: a 4x1 numpy array, output: a 3x1 encoded numpy array and a 4x1 reconstructed output<br />
+2.AE.describe()-->input:none, output:[input,200,200,100,50,3,50,100,200,200,Output]<br />
+**saved models:**<br />
+saved models are in saves folder and can be loaded with python interpreter or ipython into an AE(){model} objectby running:<br />
+`torch.load_state_dict(*model,saves/AE.pth)`
 
-`nn_utils.py` holds various heplful for networks structures and training functions.
-
-`utils.py` holds functions for normalization and event filtering, amongst others.
-
-## Data extraction
-The raw DxAODs can be processed into a 4-dimensional dataset with `process_ROOT_4D.ipynb`, where the data is pickled into a 4D pandas Dataframe. `process_ROOT_27D.ipynb`  does the same for the 27-dimensional data.
-Since pickled python objects are very version incompatible, it is recommended to process the raw ROOT DxAODs instead of providing the pickled processed data. 
-
-For ease of use, put raw data in `data/` and put processed data in `processed_data/`
-
-The 27-variables in question are:
-
-|Value|
-|:---|
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.pt
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.eta
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.phi
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.m
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.ActiveArea
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.ActiveArea4vec_eta
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.ActiveArea4vec_m
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.ActiveArea4vec_phi
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.ActiveArea4vec_pt
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.AverageLArQF
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.NegativeE
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.HECQuality
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.LArQuality
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.Width
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.WidthPhi
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.CentroidR
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.DetectorEta
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.LeadingClusterCenterLambda
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.LeadingClusterPt
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.LeadingClusterSecondLambda
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.LeadingClusterSecondR
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.N90Constituents
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.EMFrac
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.HECFrac
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.Timing
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.OotFracClusters10
-HLT_xAOD__JetContainer_TrigHLTJetDSSelectorCollectionAuxDyn.OotFracClusters5 
-
-These values are nice to work with since they are not lists of variable length, which suits our networks with constant input sizes. Worth noting is that ActiveArea and N90Constituents are discrete values.
-
-The pre-processing divides every jet as a single event. Further experiments with whole events might be interesting, i.e. a 8-dim or 54-dim AE for dijet events. 
-
+## Data <br />
+**training data**<br />
+(https://drive.google.com/open?id=1-mujHxt2HEdmo6C4wAWW5k88d3YEV9XN)<br />
+**testing data**<br />
+(https://drive.google.com/open?id=1mhweZvAIELxWq522Q8QhSGDzkXzy_Wxq)<br />
 ## Training
-ML details of the training process is in Wullf's [thesis](https://lup.lub.lu.se/student-papers/search/publication/9004751). Two well-functioning examples are `4D/fastai_AE_3D_200_no1cycle.ipynb` and `27D/27D_train.py`.
-
-## Analysis
-fastai saves trained models in the folder `models/` relative to the training script, with the .pth file extension. 
-
-In `27D/27D_analysis.py` there is analysis of a network with a 18D latent space (i.e. a 27/18 compression ratio), with histogram comparisons of the different values and residual plots. Special attention might be given to these residuals as they tell a lot about the performance of the network.
-
-For a more detailed plots of residuals and correlations between them, see the last part of `4D/fastai_AE_3D_200_no1cycle_analysis.ipynb`  
-
-## Saving back to ROOT
-To save a 27-dim multi-dimensional array of decoded data back into a ROOT TTree for analysis once again, the script `ndarray_to_ROOT.py` is available. (Soon for other dimensions as well) You'll have to run Athena yourself to turn this into a proper xAOD.
+Training process can be observed in AE.ipynb I used a batch size of 1024 elements with learning rate varying from .1 to 1e-8
+model got its convergence in about 400 epochs with Ranger optimizer and no batch normalisation.
 
 ## TODO and ideas:
-Analysis scripts for CPU/GPU and memory usage when evaluating the networks.
-
-Adding more robust scripts for extraction from the raw ROOT data, i.e. actual scripts and not jupyter-notebooks, for 4, 25 and 27 dimensions. (And optimize them.)
-
-Chain networks with other compression techniques. 
-
-Train on whole events and not only on individual jets. 
-
+Make a fully abstract script for general purpose use not only for ML practitioners.<br />
+Implement the project with variational autoencoder.<br />
+Implement the architecture using Root
