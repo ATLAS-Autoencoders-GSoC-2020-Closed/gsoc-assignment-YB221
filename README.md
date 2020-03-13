@@ -63,8 +63,11 @@ Now run jupyter notebook and run the AE.ipynb in cloned folder
 )<br />
 all the layers are linearly connected with tanh() activation function after each layer except last layer as the actual value range wider than(-1,1).
 
-**Analysis and plots:** An example of running a 4-dimensional already trained network is `4D/fastai_AE_3D_200_no1cycle_analysis.ipynb`
-For an example of analysing a 27-D network is `27D/27D_analysis.py`.
+**Analysis and plots:** <br />
+![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/M.jpeg)
+![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/eta.jpeg)
+![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/phi.jpeg)
+![Alt Text](https://github.com/YB221/GSoC_Autoencoder_4var_to_3_CERN_HSF_ATLAS/blob/master/images/pt.jpeg)
 
 **Code structure:** The folders named `4D/`, `25D/` and `27D/` simply holds training analysis scripts for that amount of dimensions. 
 
